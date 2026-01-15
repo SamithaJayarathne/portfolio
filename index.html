@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samitha | Portfolio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+:root {
+  --primary: #3B82F6;
+  --accent: #00f2ff;
+  --bg-dark: #030712;
+  --bg-card: rgba(31, 41, 55, 0.6);
+  --text-light: #f9fafb;
+  --text-muted: #9ca3af;
+  --neon-glow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* GLOBAL */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; scroll-behavior: smooth; }
+body { 
+    background: var(--bg-dark); 
+    color: var(--text-light); 
+    overflow-x:hidden; 
+    perspective:1000px; 
+}
+
+/* Scanline Effect Overlay */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    z-index: 9999;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  position:relative; overflow:hidden;
+  background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+}
+
+.hero h1 { 
+    font-size:clamp(2.5rem, 8vw, 5rem); 
+    font-weight:700; 
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: var(--neon-glow);
+}
+
+.hero-subtitle {
+  margin-top: 15px;
+  font-size: 1.5rem;
+  font-family: 'Fira Code', monospace;
+  color: var(--accent);
+}
+
+.dot { animation: blink 1s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Floating tech icons hero */
+.hero .tech-icon {
+  position:absolute; font-size:3rem; opacity:0.3; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 0 10px currentColor);
+}
+.hero .tech-icon:hover { transform: scale(1.4) rotate(15deg); opacity:0.8; filter: drop-shadow(0 0 20px currentColor); }
+
+/* NON-HERO TECH BACKGROUND */
+.section-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-bg-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* SECTIONS */
+section { padding:100px 10%; position:relative; z-index: 1; }
+.section-title { text-align:center; margin-bottom:60px; }
+.section-title h2 { 
+    font-size:2.5rem; 
+    color: var(--primary); 
+    font-family: 'Fira Code', monospace;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* ABOUT & MUSIC */
+.content-box {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.about p, .music p { font-size:1.2rem; line-height:1.8rem; color:var(--text-light); }
+
+/* TECHNOLOGIES */
+.tech-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; max-width:1200px; margin:0 auto; }
+.tech-item {
+  background: rgba(255,255,255,0.03);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid var(--primary);
+  display:flex; align-items:center; gap:15px; font-size:1.1rem;
+  transition: all 0.3s ease;
+}
+.tech-item:hover { 
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateX(10px);
+    box-shadow: var(--neon-glow);
+}
+.tech-item a { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; width: 100%; }
+
+/* LATEST UPDATES */
+.updates { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; }
+.update-card { 
+    background: var(--bg-card); 
+    border-radius:15px; 
+    overflow:hidden; 
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.4s ease;
+}
+.update-card:hover { 
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: var(--neon-glow);
+}
+.update-card img { width:100%; height:200px; object-fit:cover; filter: grayscale(40%); transition: 0.4s; }
+.update-card:hover img { filter: grayscale(0%); }
+.update-content { padding:20px; }
+.update-content h3 { margin-bottom:10px; color: var(--accent); }
+
+/* CONTACT */
+.contact-section { text-align:center; padding: 100px 10% 40px; }
+.contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
+.contact-section a {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:55px; height:55px; border-radius:12px;
+  color:white; font-size:1.4rem; transition: 0.3s;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.contact-section a:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.contact-section .instagram:hover { background:#E4405F; }
+.contact-section .facebook:hover { background:#1877F2; }
+.contact-section .github:hover { background:#333; }
+.contact-section .linkedin:hover { background:#0A66C2; }
+.contact-section .whatsapp:hover { background:#25D366; }
+.contact-section .youtube:hover { background:#FF0000; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 10%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+.footer-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.footer-credit {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+.footer-credit span {
+  color: var(--primary);
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+}
+
+/* Canvas Layouts */
+.section-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
+
+/* RESPONSIVE */
+@media (max-width:600px) {
+  .hero h1 { font-size: 2.5rem; }
+  section { padding: 60px 5%; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <canvas id="hero-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
+  
+  <a href="https://www.java.com/" target="_blank" class="tech-icon fa-brands fa-java" style="color:#f44336; top:15%; left:12%;"></a>
+  <a href="https://spring.io/projects/spring-boot" target="_blank" class="tech-icon fa-solid fa-leaf" style="color:#4CAF50; top:20%; right:15%;"></a>
+  <a href="https://reactnative.dev/" target="_blank" class="tech-icon fa-brands fa-react" style="color:#61DAFB; bottom:25%; left:18%;"></a>
+  <a href="https://developer.android.com/" target="_blank" class="tech-icon fa-brands fa-android" style="color:#3DDC84; bottom:30%; right:15%;"></a>
+  <a href="https://www.arduino.cc/" target="_blank" class="tech-icon fa-solid fa-microchip" style="color:#FF6F00; top:45%; left:80%;"></a>
+  
+  <div style="position:relative; z-index:1;">
+    <h1>Samitha Jayarathne</h1>
+    <p class="hero-subtitle">
+      <span style="color:var(--text-muted)">&lt;</span> 
+      Software Engineer 
+      <span style="color:var(--text-muted)">/&gt;</span>
+      <span class="dot" style="color:var(--primary)">_</span>
+      <br>
+      <span style="font-size: 1.2rem; opacity: 0.8;">Bassist 🎸</span>
+    </p>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="tech-bg-overlay" id="grid-bg"></div>
+
+  <section class="about">
+    <canvas class="section-bg"></canvas>
+    <div class="section-title"><h2>System.out.println("About Me");</h2></div>
+    <div class="content-box">
+      <p>
+        I'm an undergraduate software engineering student passionate about **Java backend development**,
+        Swing desktop applications, Java EE & Spring Boot projects with **JWT & OAuth** authentication.
+        I also develop Android apps with Java/Kotlin, cross-platform React Native apps, and full-stack web applications.
+        I combine my coding with music as a bassist in an acoustic band.
+      </p>
+    </div>
+  </section>
+
+  <section class="technologies">
+    <canvas class="section-bg"></canvas>
+    <div class="section-title"><h2>./stack --skills</h2></div>
+    <div class="tech-grid">
+      <div class="tech-item"><a href="https://www.java.com/" target="_blank"><i class="fa-brands fa-java" style="color:#f44336"></i> Java SE/EE</a></div>
+      <div class="tech-item"><a href="https://spring.io/projects/spring-boot" target="_blank"><i class="fa-solid fa-leaf" style="color:#4CAF50"></i> Spring Boot</a></div>
+      <div class="tech-item"><a href="https://developer.android.com/" target="_blank"><i class="fa-brands fa-android" style="color:#3DDC84"></i> Android Native</a></div>
+      <div class="tech-item"><a href="https://reactnative.dev/" target="_blank"><i class="fa-brands fa-react" style="color:#61DAFB"></i> React Native</a></div>
+      <div class="tech-item"><a href="https://www.javascript.com/" target="_blank"><i class="fa-brands fa-js" style="color:#F7DF1E"></i> JavaScript (ES6+)</a></div>
+      <div class="tech-item"><a href="https://www.php.net/" target="_blank"><i class="fa-brands fa-php" style="color:#777BB4"></i> PHP Backend</a></div>
+      <div class="tech-item"><a href="https://www.mysql.com/" target="_blank"><i class="fa-solid fa-database" style="color:#F2C94C"></i> SQL & NoSQL</a></div>
+      <div class="tech-item"><a href="https://www.arduino.cc/" target="_blank"><i class="fa-solid fa-microchip" style="color:#FF6F00"></i> Embedded Systems</a></div>
+      <div class="tech-item"><a href="#"><i class="fa-solid fa-code" style="color:#007ACC"></i> VS Code / IntelliJ</a></div>
+      <div class="tech-item"><a href="#"><i class="fa-solid fa-cube" style="color:#00bcd4"></i> NetBeans / Studio</a></div>
+    </div>
+  </section>
+
+  <section class="music">
+    <canvas class="section-bg"></canvas>
+    <div class="section-title"><h2>void playMusic() 🎶</h2></div>
+    <div class="content-box">
+      <p>
+        Besides programming, I am a bassist in an acoustic music band. Music boosts my creativity,
+        rhythm, and focus, which I apply to software engineering challenges. Engineering is my logic; music is my soul.
+      </p>
+    </div>
+  </section>
+
+  <section class="updates-section">
+    <canvas class="section-bg"></canvas>
+    <div class="section-title"><h2>Recent_Commits 📰</h2></div>
+    <div class="updates">
+      <div class="update-card">
+        <img src="https://plus.unsplash.com/premium_photo-1720287601920-ee8c503af775?q=80&w=600" alt="Android App">
+        <div class="update-content">
+          <h3>M-Commerce Android App</h3>
+          <p>Feature-rich Android app with high-performance animations and real-time notifications.</p>
+        </div>
+      </div>
+      <div class="update-card">
+        <img src="https://plus.unsplash.com/premium_photo-1718674394245-9f270c5fd2b3?q=80&w=600" alt="Ticketing">
+        <div class="update-content">
+          <h3>Ticketing Platform</h3>
+          <p>Enterprise event management system built using Java EE and secure MySQL architecture.</p>
+        </div>
+      </div>
+      <div class="update-card">
+        <img src="https://plus.unsplash.com/premium_photo-1720503242835-b537741c9736?q=80&w=600" alt="Tea Factory">
+        <div class="update-content">
+          <h3>Tea Factory ERP</h3>
+          <p>Comprehensive HR & Payroll management system with a robust Java Swing interface.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="section-title"><h2>ping -a Samitha 📬</h2></div>
+    <div class="contact-links">
+      <a href="https://www.instagram.com/samitha__03/" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://web.facebook.com/samitha.jayarathne.9" class="facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://github.com/SamithaJayarathne" class="github"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/samitha-jayarathne-211b9a324/" class="linkedin"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://wa.me/94704829706" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://youtube.com/@samitha_geethanjana?si=KCxvwUX-vNxsV8-l" class="youtube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-text">&copy; 2026 All Rights Reserved.</p>
+    <p class="footer-credit">Developed by <span>Samitha Jayarathne</span></p>
+  </footer>
+</div>
+
+<script>
+// GSAP animations
+gsap.from(".hero h1",{opacity:0, scale:0.9, y:50, duration:1.2, ease:"power4.out"});
+gsap.from(".hero-subtitle",{opacity:0, duration:1, delay:0.6});
+
+gsap.utils.toArray(".section-title h2").forEach(title=>{
+  gsap.from(title,{scrollTrigger:{trigger:title,start:"top 90%"}, opacity:0, x:-30, duration:1});
+});
+
+gsap.utils.toArray(".content-box, .tech-item, .update-card").forEach(item=>{
+  gsap.from(item,{scrollTrigger:{trigger:item,start:"top 95%"}, opacity:0, y:30, duration:0.6});
+});
+
+// Tech Background Grid Animation
+gsap.to("#grid-bg", {
+  backgroundPosition: "0 120px",
+  duration: 15,
+  repeat: -1,
+  ease: "none"
+});
+
+// HERO Particle background (Unchanged as requested)
+const heroCanvas = document.getElementById('hero-bg');
+const heroCtx = heroCanvas.getContext('2d');
+heroCanvas.width = window.innerWidth;
+heroCanvas.height = window.innerHeight;
+const heroParticles = [];
+for(let i=0;i<70;i++){
+  heroParticles.push({x:Math.random()*heroCanvas.width,y:Math.random()*heroCanvas.height,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,radius:Math.random()*3+1});
+}
+function animateHeroParticles(){
+  heroCtx.clearRect(0,0,heroCanvas.width,heroCanvas.height);
+  for(let i=0;i<heroParticles.length;i++){
+    for(let j=i;j<heroParticles.length;j++){
+      let dx=heroParticles[i].x-heroParticles[j].x, dy=heroParticles[i].y-heroParticles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){ heroCtx.strokeStyle='rgba(59,130,246,0.2)'; heroCtx.lineWidth=1; heroCtx.beginPath(); heroCtx.moveTo(heroParticles[i].x,heroParticles[i].y); heroCtx.lineTo(heroParticles[j].x,heroParticles[j].y); heroCtx.stroke();}
+    }
+  }
+  heroParticles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x>heroCanvas.width)p.x=0;if(p.x<0)p.x=heroCanvas.width;if(p.y>heroCanvas.height)p.y=0;if(p.y<0)p.y=heroCanvas.height; heroCtx.fillStyle='#3B82F6'; heroCtx.beginPath(); heroCtx.arc(p.x,p.y,p.radius,0,Math.PI*2); heroCtx.fill();});
+  requestAnimationFrame(animateHeroParticles);
+}
+animateHeroParticles();
+
+// SECTION PARTICLES
+document.querySelectorAll('.section-bg').forEach(canvas=>{
+  const ctx = canvas.getContext('2d');
+  const resize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+  };
+  resize();
+  const particles = [];
+  for(let i=0;i<30;i++){ particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,radius:Math.random()*2});}
+  function animateSectionParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy;
+      if(p.x>canvas.width)p.x=0;if(p.x<0)p.x=canvas.width;if(p.y>canvas.height)p.y=0;if(p.y<0)p.y=canvas.height;
+      ctx.fillStyle='rgba(59,130,246,0.1)'; ctx.beginPath(); ctx.arc(p.x,p.y,p.radius,0,Math.PI*2); ctx.fill();
+    });
+    requestAnimationFrame(animateSectionParticles);
+  }
+  animateSectionParticles();
+  window.addEventListener('resize', resize);
+});
+</script>
+
+</body>
+</html>
