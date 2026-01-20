@@ -1,390 +1,993 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samitha | Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samitha | Portfolio</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --primary: #3B82F6;
+      --accent: #00f2ff;
+      --bg-dark: #030712;
+      --bg-card: rgba(31, 41, 55, 0.6);
+      --text-light: #f9fafb;
+      --text-muted: #9ca3af;
+      --neon-glow: 0 0 15px rgba(59, 130, 246, 0.5);
+    }
 
-<style>
-:root {
-  --primary: #3B82F6;
-  --accent: #00f2ff;
-  --bg-dark: #030712;
-  --bg-card: rgba(31, 41, 55, 0.6);
-  --text-light: #f9fafb;
-  --text-muted: #9ca3af;
-  --neon-glow: 0 0 15px rgba(59, 130, 246, 0.5);
-}
+    /* GLOBAL */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
 
-/* GLOBAL */
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; scroll-behavior: smooth; }
-body { 
-    background: var(--bg-dark); 
-    color: var(--text-light); 
-    overflow-x:hidden; 
-    perspective:1000px; 
-}
+    body {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+      perspective: 1000px;
+      font-size: 14.5px;
+    }
 
-/* Scanline Effect Overlay */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-    z-index: 9999;
-    background-size: 100% 4px, 3px 100%;
-    pointer-events: none;
-}
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+    }
 
-/* HERO */
-.hero {
-  height: 100vh;
-  display:flex; align-items:center; justify-content:center; text-align:center;
-  position:relative; overflow:hidden;
-  background: radial-gradient(circle at center, #111827 0%, #030712 100%);
-}
+    /* --- NEW PROFILE IMAGE STYLES --- */
+    /* --- UPDATED PROFILE IMAGE STYLES --- */
+    .profile-img {
+      width: 500px;
+      /* Large desktop size */
+      height: 500px;
+      /* Keep it square for the circle */
+      max-width: 85vw;
+      /* Prevents overflow on smaller screens */
+      max-height: 85vw;
+      /* Keeps it proportional on mobile */
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.hero h1 { 
-    font-size:clamp(2.5rem, 8vw, 5rem); 
-    font-weight:700; 
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    text-shadow: var(--neon-glow);
-}
+    .profile-img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 45px rgba(59, 130, 246, 0.7);
+    }
 
-.hero-subtitle {
-  margin-top: 15px;
-  font-size: 1.5rem;
-  font-family: 'Fira Code', monospace;
-  color: var(--accent);
-}
+    /* Adjusted Hero to accommodate the larger image */
+    .hero {
+      min-height: 100vh;
+      /* Changed from height to min-height */
+      padding: 100px 20px;
+      /* Added padding for mobile breathing room */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+    }
 
-.dot { animation: blink 1s infinite; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    /* Mobile specific override for a dominant appearance */
+    @media (max-width: 768px) {
+      .profile-img {
+        width: 320px;
+        /* Specific large size for tablets/phones */
+        height: 320px;
+        margin-top: 40px;
+      }
 
-/* Floating tech icons hero */
-.hero .tech-icon {
-  position:absolute; font-size:3rem; opacity:0.3; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  filter: drop-shadow(0 0 10px currentColor);
-}
-.hero .tech-icon:hover { transform: scale(1.4) rotate(15deg); opacity:0.8; filter: drop-shadow(0 0 20px currentColor); }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
 
-/* NON-HERO TECH BACKGROUND */
-.section-wrapper {
-  position: relative;
-  overflow: hidden;
-}
+    /* -------------------------------- */
 
-.tech-bg-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: 
-    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
-  z-index: 0;
-  pointer-events: none;
-}
+    .hero h1 {
+      font-size: clamp(2.2rem, 8vw, 4.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: var(--neon-glow);
+    }
 
-/* SECTIONS */
-section { padding:100px 10%; position:relative; z-index: 1; }
-.section-title { text-align:center; margin-bottom:60px; }
-.section-title h2 { 
-    font-size:2.5rem; 
-    color: var(--primary); 
-    font-family: 'Fira Code', monospace;
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-}
+    .hero-subtitle {
+      margin-top: 1px;
+      font-size: 1.2rem;
+      font-family: 'Fira Code', monospace;
+      color: var(--accent);
+    }
 
-/* ABOUT & MUSIC */
-.content-box {
-    background: var(--bg-card);
-    padding: 40px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.about p, .music p { font-size:1.2rem; line-height:1.8rem; color:var(--text-light); }
+    .dot {
+      animation: blink 1s infinite;
+    }
 
-/* TECHNOLOGIES */
-.tech-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; max-width:1200px; margin:0 auto; }
-.tech-item {
-  background: rgba(255,255,255,0.03);
-  padding: 15px;
-  border-radius: 8px;
-  border-left: 3px solid var(--primary);
-  display:flex; align-items:center; gap:15px; font-size:1.1rem;
-  transition: all 0.3s ease;
-}
-.tech-item:hover { 
-    background: rgba(59, 130, 246, 0.1);
-    transform: translateX(10px);
-    box-shadow: var(--neon-glow);
-}
-.tech-item a { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; width: 100%; }
+    @keyframes blink {
 
-/* LATEST UPDATES */
-.updates { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; }
-.update-card { 
-    background: var(--bg-card); 
-    border-radius:15px; 
-    overflow:hidden; 
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: all 0.4s ease;
-}
-.update-card:hover { 
-    transform: translateY(-10px);
-    border-color: var(--primary);
-    box-shadow: var(--neon-glow);
-}
-.update-card img { width:100%; height:200px; object-fit:cover; filter: grayscale(40%); transition: 0.4s; }
-.update-card:hover img { filter: grayscale(0%); }
-.update-content { padding:20px; }
-.update-content h3 { margin-bottom:10px; color: var(--accent); }
+      0%,
+      100% {
+        opacity: 1;
+      }
 
-/* CONTACT */
-.contact-section { text-align:center; padding: 100px 10% 40px; }
-.contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
-.contact-section a {
-  display:inline-flex; align-items:center; justify-content:center;
-  width:55px; height:55px; border-radius:12px;
-  color:white; font-size:1.4rem; transition: 0.3s;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.contact-section a:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-.contact-section .instagram:hover { background:#E4405F; }
-.contact-section .facebook:hover { background:#1877F2; }
-.contact-section .github:hover { background:#333; }
-.contact-section .linkedin:hover { background:#0A66C2; }
-.contact-section .whatsapp:hover { background:#25D366; }
-.contact-section .youtube:hover { background:#FF0000; }
+      50% {
+        opacity: 0;
+      }
+    }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 40px 10%;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 2;
-}
-.footer-text {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-.footer-credit {
-  margin-top: 10px;
-  font-size: 1rem;
-}
-.footer-credit span {
-  color: var(--primary);
-  font-weight: 600;
-  text-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-}
+    /* Floating tech icons hero (Original Style) */
+    .hero .tech-icon {
+      position: absolute;
+      font-size: 3rem;
+      opacity: 0.3;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 0 10px currentColor);
+    }
 
-/* Canvas Layouts */
-.section-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
+    .hero .tech-icon:hover {
+      transform: scale(1.4) rotate(15deg);
+      opacity: 0.8;
+      filter: drop-shadow(0 0 20px currentColor);
+    }
 
-/* RESPONSIVE */
-@media (max-width:600px) {
-  .hero h1 { font-size: 2.5rem; }
-  section { padding: 60px 5%; }
-}
-</style>
+    /* SECTION BACKGROUNDS */
+    .section-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    section {
+      padding: 80px 10%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* CONTENT BOXES */
+    .content-box {
+      background: var(--bg-card);
+      padding: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .about p,
+    .music p {
+      font-size: 1.05rem;
+      line-height: 1.7rem;
+      color: var(--text-light);
+    }
+
+    /* TECH GRID */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tech-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .tech-item:hover {
+      transform: translateX(8px);
+      background: rgba(59, 130, 246, 0.15);
+      box-shadow: var(--neon-glow);
+    }
+
+    /* PROJECT CARDS & SLIDER */
+    /* Strict 3-column layout for big screens */
+    .updates {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .update-card {
+      background: var(--bg-card);
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .update-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: var(--neon-glow);
+    }
+
+    /* Standard card image */
+    .update-card>img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: grayscale(30%);
+      transition: 0.4s;
+    }
+
+    .update-card:hover>img {
+      filter: grayscale(0%);
+    }
+
+    /* SLIDER STYLES */
+    .slider-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .slider-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slider-wrapper img.slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      filter: grayscale(30%);
+    }
+
+    .update-card:hover .slider-wrapper img.slide {
+      filter: grayscale(0%);
+    }
+
+    .slider-wrapper img.slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: var(--primary);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .update-card:hover .slider-btn {
+      opacity: 1;
+    }
+
+    .slider-btn:hover {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--neon-glow);
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    .update-content {
+      padding: 20px;
+    }
+
+    .update-content h3 {
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .update-content p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 15px;
+      color: var(--text-muted);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      border-radius: 4px;
+      color: #fff;
+    }
+
+    /* LEARNING JOURNEY */
+    .learning-list {
+      max-width: 650px;
+      margin: 0 auto;
+      padding-left: 20px;
+      list-style: none;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .learning-list li {
+      position: relative;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      font-size: 1.15rem;
+      color: var(--text-light);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .learning-list li::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .learning-list li:hover {
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .learning-list li:hover::before {
+      transform: translateY(-50%) scale(1.3);
+      background: #00f2ff;
+    }
+
+
+    /* MUSIC SECTION */
+    .music-box {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .music-info {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .music-visual {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .music-visual span {
+      width: 8px;
+      background: var(--primary);
+      animation: wave 1s infinite alternate;
+      border-radius: 10px;
+    }
+
+    @keyframes wave {
+      from {
+        height: 10%;
+      }
+
+      to {
+        height: 100%;
+      }
+    }
+
+    /* CONTACT HOVER */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .contact-section a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.3rem;
+      transition: 0.4s;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-section a:hover {
+      transform: scale(1.1) translateY(-5px);
+      color: #fff;
+    }
+
+    .contact-section .instagram:hover {
+      background: #E4405F;
+      box-shadow: 0 0 15px #E4405F;
+    }
+
+    .contact-section .facebook:hover {
+      background: #1877F2;
+      box-shadow: 0 0 15px #1877F2;
+    }
+
+    .contact-section .github:hover {
+      background: #333;
+      box-shadow: 0 0 15px #6e5494;
+    }
+
+    .contact-section .linkedin:hover {
+      background: #0A66C2;
+      box-shadow: 0 0 15px #0A66C2;
+    }
+
+    .contact-section .whatsapp:hover {
+      background: #25D366;
+      box-shadow: 0 0 15px #25D366;
+    }
+
+    .contact-section .youtube:hover {
+      background: #FF0000;
+      box-shadow: 0 0 15px #FF0000;
+    }
+
+    /* BACK TO TOP BUTTON */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      box-shadow: var(--neon-glow);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    #backToTop:hover {
+      transform: scale(1.1);
+      background: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 10%;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .section-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .updates {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .updates {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      section {
+        padding: 60px 6%;
+      }
+
+      .tech-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero .tech-icon {
+        font-size: 2rem;
+      }
+    }
+
+    /* Mobile adjustments for profile image */
+    @media (max-width: 600px) {
+      .profile-img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="hero">
-  <canvas id="hero-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
-  
-  <a href="https://www.java.com/" target="_blank" class="tech-icon fa-brands fa-java" style="color:#f44336; top:15%; left:12%;"></a>
-  <a href="https://spring.io/projects/spring-boot" target="_blank" class="tech-icon fa-solid fa-leaf" style="color:#4CAF50; top:20%; right:15%;"></a>
-  <a href="https://reactnative.dev/" target="_blank" class="tech-icon fa-brands fa-react" style="color:#61DAFB; bottom:25%; left:18%;"></a>
-  <a href="https://developer.android.com/" target="_blank" class="tech-icon fa-brands fa-android" style="color:#3DDC84; bottom:30%; right:15%;"></a>
-  <a href="https://www.arduino.cc/" target="_blank" class="tech-icon fa-solid fa-microchip" style="color:#FF6F00; top:45%; left:80%;"></a>
-  
-  <div style="position:relative; z-index:1;">
-    <h1>Samitha Jayarathne</h1>
-    <p class="hero-subtitle">
-      <span style="color:var(--text-muted)">&lt;</span> 
-      Software Engineering Undergraduate
-      <span style="color:var(--text-muted)">/&gt;</span>
-      <span class="dot" style="color:var(--primary)">_</span>
-      <br>
-      <span style="font-size: 1.2rem; opacity: 0.8;">Bassist 🎸</span>
-    </p>
+  <button id="backToTop" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <div class="hero">
+    <canvas id="hero-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
+
+    <i class="tech-icon fa-brands fa-java" style="color:#f44336; top:15%; left:12%;"></i>
+    <i class="tech-icon fa-solid fa-leaf" style="color:#4CAF50; top:20%; right:15%;"></i>
+    <i class="tech-icon fa-brands fa-react" style="color:#61DAFB; bottom:25%; left:18%;"></i>
+    <i class="tech-icon fa-brands fa-android" style="color:#3DDC84; bottom:30%; right:15%;"></i>
+    <i class="tech-icon fa-solid fa-microchip" style="color:#FF6F00; top:45%; left:80%;"></i>
+
+    <div style="position:relative; z-index:1;">
+      <img src="profile/profile-1.jpg" alt="Samitha Jayarathne" class="profile-img">
+
+      <h1>Samitha Jayarathne</h1>
+      <p class="hero-subtitle">
+        <span style="color:var(--text-muted)">&lt;</span>
+        Software Engineering Undergraduate
+        <span style="color:var(--text-muted)">/&gt;</span>
+        <span class="dot" style="color:var(--primary)">_</span>
+        <br>
+        <span style="font-size: 1rem; opacity: 0.8;">Bassist 🎸</span>
+      </p>
+    </div>
   </div>
-</div>
 
-<div class="section-wrapper">
-  <div class="tech-bg-overlay" id="grid-bg"></div>
+  <div class="section-wrapper">
+    <div class="tech-bg-overlay" id="grid-bg"></div>
 
-  <section class="about">
-    <canvas class="section-bg"></canvas>
-    <div class="section-title"><h2>System.out.println("About Me");</h2></div>
-    <div class="content-box">
-      <p>
-        I'm an undergraduate software engineering student passionate about Java backend development**,
-        Swing desktop applications, Java EE & Spring Boot projects with JWT & OAuth authentication.
-        I also develop Android apps with Java/Kotlin, cross-platform React Native apps, and full-stack web applications.
-        I combine my coding with music as a bassist in an acoustic band.
-      </p>
-    </div>
-  </section>
+    <section class="about">
+      <canvas class="section-bg"></canvas>
+      <div class="section-title">
+        <h2>println("About Me")</h2>
+      </div>
+      <div class="content-box">
+        <p>
+          I’m an undergraduate software engineering student passionate about Java backend development and building
+          robust applications. I have experience with Java Swing desktop apps, Java EE, Spring Boot (with JWT & OAuth
+          authentication), and cross-platform mobile apps using Android (Java & Kotlin) and React Native. I’m currently
+          deepening my skills in Kotlin and modern Android development to create smooth, scalable mobile experiences.
 
-  <section class="technologies">
-    <canvas class="section-bg"></canvas>
-    <div class="section-title"><h2>./stack --skills</h2></div>
-    <div class="tech-grid">
-      <div class="tech-item"><a href="https://www.java.com/" target="_blank"><i class="fa-brands fa-java" style="color:#f44336"></i> Java SE/EE</a></div>
-      <div class="tech-item"><a href="https://spring.io/projects/spring-boot" target="_blank"><i class="fa-solid fa-leaf" style="color:#4CAF50"></i> Spring Boot</a></div>
-      <div class="tech-item"><a href="https://developer.android.com/" target="_blank"><i class="fa-brands fa-android" style="color:#3DDC84"></i> Android Native</a></div>
-      <div class="tech-item"><a href="https://reactnative.dev/" target="_blank"><i class="fa-brands fa-react" style="color:#61DAFB"></i> React Native</a></div>
-      <div class="tech-item"><a href="https://www.javascript.com/" target="_blank"><i class="fa-brands fa-js" style="color:#F7DF1E"></i> JavaScript (ES6+)</a></div>
-      <div class="tech-item"><a href="https://www.php.net/" target="_blank"><i class="fa-brands fa-php" style="color:#777BB4"></i> PHP Backend</a></div>
-      <div class="tech-item"><a href="https://www.mysql.com/" target="_blank"><i class="fa-solid fa-database" style="color:#F2C94C"></i> SQL & NoSQL</a></div>
-      <div class="tech-item"><a href="https://www.arduino.cc/" target="_blank"><i class="fa-solid fa-microchip" style="color:#FF6F00"></i> Embedded Systems</a></div>
-      <div class="tech-item"><a href="#"><i class="fa-solid fa-code" style="color:#007ACC"></i> VS Code / IntelliJ</a></div>
-      <div class="tech-item"><a href="#"><i class="fa-solid fa-cube" style="color:#00bcd4"></i> NetBeans / Studio</a></div>
-    </div>
-  </section>
+          <br /><br />Beyond coding, I’m a musician and bassist, bringing creativity and rhythm into everything I do.
+          For me, engineering is about logic, and music is about expression — together, they shape how I approach
+          problem-solving and innovation.
+        </p>
+      </div>
+    </section>
 
-  <section class="music">
-    <canvas class="section-bg"></canvas>
-    <div class="section-title"><h2>void playMusic() 🎶</h2></div>
-    <div class="content-box">
-      <p>
-        Besides programming, I am a bassist in an acoustic music band. Music boosts my creativity,
-        rhythm, and focus, which I apply to software engineering challenges. Engineering is my logic; music is my soul.
-      </p>
-    </div>
-  </section>
+    <section class="technologies">
+      <canvas class="section-bg"></canvas>
+      <div class="section-title"><h2>&lt;skillsAndTools /&gt;</h2></div>
+      <div class="tech-grid">
+        <div class="tech-item"><i class="fa-brands fa-java" style="color:#f44336"></i> Java SE/EE</div>
+        <div class="tech-item"><i class="fa-solid fa-leaf" style="color:#4CAF50"></i> Spring Boot</div>
+        <div class="tech-item">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            style="fill:#7F52FF; width:20px; height:20px; margin-right: 2px;">
+            <path d="M24 24H0V0h24L12 12Z" />
+          </svg>
+          Kotlin
+        </div>
+        <div class="tech-item"><i class="fa-brands fa-android" style="color:#3DDC84"></i> Android Native</div>
+        <div class="tech-item"><i class="fa-brands fa-react" style="color:#61DAFB"></i> React Native</div>
+        <div class="tech-item"><i class="fa-brands fa-js" style="color:#F7DF1E"></i> JavaScript</div>
+        <div class="tech-item"><i class="fa-brands fa-php" style="color:#777BB4"></i> PHP Backend</div>
+        <div class="tech-item"><i class="fa-solid fa-database" style="color:#F2C94C"></i> SQL & NoSQL</div>
+        <div class="tech-item">
+          <img src="arduino.svg" alt="Arduino" style="width:20px; height:20px; margin-right:8px;">
+          Arduino
+        </div>
+        <div class="tech-item">
+          <img src="maven.svg" alt="Maven" style="width:20px; height:20px; margin-right:8px;">
+          Maven
+        </div>
+        <div class="tech-item">
+          <img src="gradle.svg" alt="Gradle" style="width:20px; height:20px; margin-right:8px;">
+          Gradle
+        </div>
+        <div class="tech-item">
+          <img src="intellij.svg" alt="IntelliJ" style="width:20px; height:20px; margin-right:8px;">
+          IntelliJ
+        </div>
+        <div class="tech-item">
+          <img src="android-studio.svg" alt="Android Studio" style="width:20px; height:20px; margin-right:8px;">
+          Android Studio
+        </div>
+        <div class="tech-item">
+          <img src="vs.svg" alt="VS Code" style="width:20px; height:20px; margin-right:8px;">
+          VS Code
+        </div>
 
-  <section class="updates-section">
-    <canvas class="section-bg"></canvas>
-    <div class="section-title"><h2>Recent_Commits 📰</h2></div>
-    <div class="updates">
-      <div class="update-card">
-        <img src="https://plus.unsplash.com/premium_photo-1720287601920-ee8c503af775?q=80&w=600" alt="Android App">
-        <div class="update-content">
-          <h3>M-Commerce Android App</h3>
-          <p>Feature-rich Android app with high-performance animations and real-time notifications.</p>
+      </div>
+    </section>
+
+    <section class="updates-section">
+      <canvas class="section-bg"></canvas>
+      <div class="section-title">
+        <h2>Recent_Commits 📰</h2>
+      </div>
+      <div class="updates">
+        <div class="update-card">
+          <img src="https://plus.unsplash.com/premium_photo-1720287601920-ee8c503af775?q=80&w=600" alt="Android App">
+          <div class="update-content">
+            <h3>M-Commerce Android App (Ongoing)</h3>
+            <p>Ongoing mobile commerce solution featuring real-time data sync and smooth UX.</p>
+            <div class="tech-stack">
+              <span class="tag">Java</span><span class="tag">Firebase</span><span class="tag">MySQL</span><span
+                class="tag">Android</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="update-card project-slider">
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <img src="link-up/1.png" class="slide active" alt="ERP 1">
+              <img src="link-up/2.png" class="slide" alt="ERP 2">
+              <img src="link-up/3.png" class="slide" alt="ERP 3">
+            </div>
+            <button class="slider-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="update-content">
+            <h3>LinkUp - Chat App</h3>
+            <p>LinkUp is a cross-platform chat application built with React Native, enabling real-time messaging between
+              users. The backend is powered by Java EE and MySQL, using WebSockets for instant communication. The app
+              supports user profiles, media sharing, and real-time notifications, with a TypeScript-based frontend for
+              smooth, scalable, and maintainable code.</p>
+            <div class="tech-stack">
+              <span class="tag">React Native</span><span class="tag">Java EE</span><span class="tag">MySQL</span><span
+                class="tag">TypeScript</span><span class="tag">WebSocket</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="update-card project-slider">
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <img src="event-sphere/1.png" class="slide active" alt="Event Sphere 1">
+              <img src="event-sphere/2.png" class="slide" alt="Event Sphere 2">
+              <img src="event-sphere/3.png" class="slide" alt="Event Sphere 3">
+              <img src="event-sphere/4.png" class="slide" alt="Event Sphere 4">
+              <img src="event-sphere/5.png" class="slide" alt="Event Sphere 5">
+              <img src="event-sphere/6.png" class="slide" alt="Event Sphere 6">
+              <img src="event-sphere/7.png" class="slide" alt="Event Sphere 7">
+              <img src="event-sphere/8.png" class="slide" alt="Event Sphere 8">
+              <img src="event-sphere/9.png" class="slide" alt="Event Sphere 9">
+              <img src="event-sphere/10.png" class="slide" alt="Event Sphere 10">
+              <img src="event-sphere/11.png" class="slide" alt="Event Sphere 11">
+              <img src="event-sphere/12.png" class="slide" alt="Event Sphere 12">
+            </div>
+            <button class="slider-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="update-content">
+            <h3>Event Sphere - Ticketing</h3>
+            <p>An online event management and ticketing platform that allows users to browse events, purchase tickets,
+              and receive instant digital tickets via email and the web application. The system also includes an
+              analytics-focused admin panel for managing events and monitoring ticket sales.</p>
+            <div class="tech-stack">
+              <span class="tag">Java EE</span><span class="tag">Tailwind</span><span class="tag">MySQL</span><span
+                class="tag">Hibernate</span><span class="tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="update-card project-slider">
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <img src="tea/1.png" class="slide active" alt="ERP 1">
+              <img src="tea/2.png" class="slide" alt="ERP 2">
+              <img src="tea/3.png" class="slide" alt="ERP 3">
+              <img src="tea/4.png" class="slide" alt="ERP 4">
+              <img src="tea/5.png" class="slide" alt="ERP 5">
+              <img src="tea/6.png" class="slide" alt="ERP 6">
+            </div>
+            <button class="slider-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="update-content">
+            <h3>Roslin Hills Tea Factory ERP</h3>
+            <p>A full-scale ERP system developed for managing tea factory operations. I led the project and developed
+              the HR and Payroll modules, including employee management, attendance tracking, automated payroll
+              processing, payslip generation, email notifications, and employee loan application and loan management.
+            </p>
+            <div class="tech-stack">
+              <span class="tag">Java</span><span class="tag">Swing UI</span><span class="tag">MySQL</span><span
+                class="tag">Jasper Reports</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="update-card project-slider">
+          <div class="slider-container">
+            <div class="slider-wrapper">
+              <img src="epic-lib/1.jpg" class="slide active" alt="ERP 1">
+              <img src="epic-lib/2.jpg" class="slide" alt="ERP 2">
+              <img src="epic-lib/3.jpg" class="slide" alt="ERP 3">
+              <img src="epic-lib/4.jpg" class="slide" alt="ERP 4">
+              <img src="epic-lib/5.jpg" class="slide" alt="ERP 5">
+              <img src="epic-lib/6.jpg" class="slide" alt="ERP 6">
+            </div>
+            <button class="slider-btn prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next-btn"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+          <div class="update-content">
+            <h3>Epic Reads – Library Management System</h3>
+            <p>Epic Reads is a comprehensive desktop library management system designed to streamline daily library
+              operations. I developed modules for book and member management, borrowing and return tracking, due date
+              handling, fine calculation, and attendance monitoring. The system features a user-friendly interface and a
+              structured database to ensure efficient and reliable library management.</p>
+            <div class="tech-stack">
+              <span class="tag">Java</span><span class="tag">Swing UI</span><span class="tag">MySQL</span><span
+                class="tag">Jasper Reports</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="update-card">
-        <img src="https://plus.unsplash.com/premium_photo-1718674394245-9f270c5fd2b3?q=80&w=600" alt="Ticketing">
-        <div class="update-content">
-          <h3>Ticketing Platform</h3>
-          <p>Enterprise event management system built using Java EE and secure MySQL architecture.</p>
+    </section>
+
+    <!-- LEARNING JOURNEY -->
+    <section class="learning-journey">
+      <div class="section-title">
+        <h2>private Growth buildCareer()</h2>
+      </div>
+      <ul class="learning-list">
+        <li>2023: Web Development - PHP, JS, HTML, CSS, MySQL</li>
+        <li>2024: Java OOP, Swing Desktop Apps</li>
+        <li>2025: Java EE, React Native, Spring Boot, Design Patterns</li>
+        <li>2026-Present: Android Development - Java & Kotlin, Firebase</li>
+      </ul>
+    </section>
+
+    <section class="music">
+      <canvas class="section-bg"></canvas>
+      <div class="section-title">
+        <h2>fun playMusic(): Unit</h2>
+      </div>
+      <div class="content-box">
+        <div class="music-box">
+          <div class="music-info">
+            <p>When I'm not coding systems, I'm finding rhythm as the <span
+                style="font-weight: bold; color: #1877F2; font-size: large;">Bassist</span> in <span
+                style="font-weight: bold; color: #1877F2; font-size: large;">Shravana Acoustic Band</span>. Whether it's
+              the structure of a Java application or the groove of a bass line, I believe in the power of patterns and
+              harmony.</p>
+          </div>
+          <div class="music-visual">
+            <span style="animation-delay: 0.1s;"></span>
+            <span style="animation-delay: 0.3s;"></span>
+            <span style="animation-delay: 0.2s;"></span>
+            <span style="animation-delay: 0.4s;"></span>
+            <span style="animation-delay: 0.5s;"></span>
+          </div>
         </div>
       </div>
-      <div class="update-card">
-        <img src="https://plus.unsplash.com/premium_photo-1720503242835-b537741c9736?q=80&w=600" alt="Tea Factory">
-        <div class="update-content">
-          <h3>Tea Factory ERP</h3>
-          <p>Comprehensive HR & Payroll management system with a robust Java Swing interface.</p>
-        </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="section-title">
+        <h2>ping -a Samitha 📬</h2>
       </div>
-    </div>
-  </section>
+      <div class="contact-links">
+        <a href="https://www.instagram.com/samitha__03/" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://web.facebook.com/samitha.jayarathne.9" class="facebook"><i
+            class="fa-brands fa-facebook"></i></a>
+        <a href="https://github.com/SamithaJayarathne" class="github"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/samitha-jayarathne-211b9a324/" class="linkedin"><i
+            class="fa-brands fa-linkedin"></i></a>
+        <a href="https://wa.me/94704829706" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://youtube.com/@samitha_geethanjana?si=KCxvwUX-vNxsV8-l" class="youtube"><i
+            class="fa-brands fa-youtube"></i></a>
+      </div>
+    </section>
 
-  <section class="contact-section">
-    <div class="section-title"><h2>ping -a Samitha 📬</h2></div>
-    <div class="contact-links">
-      <a href="https://www.instagram.com/samitha__03/" class="instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://web.facebook.com/samitha.jayarathne.9" class="facebook"><i class="fa-brands fa-facebook"></i></a>
-      <a href="https://github.com/SamithaJayarathne" class="github"><i class="fa-brands fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/samitha-jayarathne-211b9a324/" class="linkedin"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://wa.me/94704829706" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
-      <a href="https://youtube.com/@samitha_geethanjana?si=KCxvwUX-vNxsV8-l" class="youtube"><i class="fa-brands fa-youtube"></i></a>
-    </div>
-  </section>
+    <footer>
+      <p>&copy; 2026 Developed by <span style="color:var(--primary); font-weight:600;">Samitha Jayarathne</span></p>
+    </footer>
+  </div>
 
-  <footer>
-    <p class="footer-text">&copy; 2026 All Rights Reserved.</p>
-    <p class="footer-credit">Developed by <span>Samitha Jayarathne</span></p>
-  </footer>
-</div>
+  <script>
+    // GSAP animations
+    gsap.from(".hero h1", { opacity: 0, scale: 0.9, y: 50, duration: 1.2, ease: "power4.out" });
+    gsap.from(".hero-subtitle", { opacity: 0, duration: 1, delay: 0.6 });
+    // New animation for the profile image
+    gsap.from(".profile-img", { opacity: 0, scale: 0.5, y: -50, duration: 1, delay: 0.3, ease: "back.out(1.7)" });
 
-<script>
-// GSAP animations
-gsap.from(".hero h1",{opacity:0, scale:0.9, y:50, duration:1.2, ease:"power4.out"});
-gsap.from(".hero-subtitle",{opacity:0, duration:1, delay:0.6});
 
-gsap.utils.toArray(".section-title h2").forEach(title=>{
-  gsap.from(title,{scrollTrigger:{trigger:title,start:"top 90%"}, opacity:0, x:-30, duration:1});
-});
-
-gsap.utils.toArray(".content-box, .tech-item, .update-card").forEach(item=>{
-  gsap.from(item,{scrollTrigger:{trigger:item,start:"top 95%"}, opacity:0, y:30, duration:0.6});
-});
-
-// Tech Background Grid Animation
-gsap.to("#grid-bg", {
-  backgroundPosition: "0 120px",
-  duration: 15,
-  repeat: -1,
-  ease: "none"
-});
-
-// HERO Particle background (Unchanged as requested)
-const heroCanvas = document.getElementById('hero-bg');
-const heroCtx = heroCanvas.getContext('2d');
-heroCanvas.width = window.innerWidth;
-heroCanvas.height = window.innerHeight;
-const heroParticles = [];
-for(let i=0;i<70;i++){
-  heroParticles.push({x:Math.random()*heroCanvas.width,y:Math.random()*heroCanvas.height,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,radius:Math.random()*3+1});
-}
-function animateHeroParticles(){
-  heroCtx.clearRect(0,0,heroCanvas.width,heroCanvas.height);
-  for(let i=0;i<heroParticles.length;i++){
-    for(let j=i;j<heroParticles.length;j++){
-      let dx=heroParticles[i].x-heroParticles[j].x, dy=heroParticles[i].y-heroParticles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<120){ heroCtx.strokeStyle='rgba(59,130,246,0.2)'; heroCtx.lineWidth=1; heroCtx.beginPath(); heroCtx.moveTo(heroParticles[i].x,heroParticles[i].y); heroCtx.lineTo(heroParticles[j].x,heroParticles[j].y); heroCtx.stroke();}
-    }
-  }
-  heroParticles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x>heroCanvas.width)p.x=0;if(p.x<0)p.x=heroCanvas.width;if(p.y>heroCanvas.height)p.y=0;if(p.y<0)p.y=heroCanvas.height; heroCtx.fillStyle='#3B82F6'; heroCtx.beginPath(); heroCtx.arc(p.x,p.y,p.radius,0,Math.PI*2); heroCtx.fill();});
-  requestAnimationFrame(animateHeroParticles);
-}
-animateHeroParticles();
-
-// SECTION PARTICLES
-document.querySelectorAll('.section-bg').forEach(canvas=>{
-  const ctx = canvas.getContext('2d');
-  const resize = () => {
-    canvas.width = window.innerWidth;
-    canvas.height = canvas.parentElement.offsetHeight;
-  };
-  resize();
-  const particles = [];
-  for(let i=0;i<30;i++){ particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,radius:Math.random()*2});}
-  function animateSectionParticles(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy;
-      if(p.x>canvas.width)p.x=0;if(p.x<0)p.x=canvas.width;if(p.y>canvas.height)p.y=0;if(p.y<0)p.y=canvas.height;
-      ctx.fillStyle='rgba(59,130,246,0.1)'; ctx.beginPath(); ctx.arc(p.x,p.y,p.radius,0,Math.PI*2); ctx.fill();
+    gsap.utils.toArray(".section-title h2").forEach(title => {
+      gsap.from(title, { scrollTrigger: { trigger: title, start: "top 90%" }, opacity: 0, x: -30, duration: 1 });
     });
-    requestAnimationFrame(animateSectionParticles);
-  }
-  animateSectionParticles();
-  window.addEventListener('resize', resize);
-});
-</script>
+
+    gsap.utils.toArray(".content-box, .tech-item, .update-card").forEach(item => {
+      gsap.from(item, { scrollTrigger: { trigger: item, start: "top 95%" }, opacity: 0, y: 30, duration: 0.6 });
+    });
+
+    // Tech Background Grid Animation
+    gsap.to("#grid-bg", {
+      backgroundPosition: "0 120px",
+      duration: 15,
+      repeat: -1,
+      ease: "none"
+    });
+
+    // Back to Top Logic
+    const btt = document.getElementById("backToTop");
+    window.onscroll = function () {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        btt.style.display = "block";
+      } else {
+        btt.style.display = "none";
+      }
+    };
+    btt.onclick = function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // --- MULTIPLE SLIDER LOGIC ---
+    document.querySelectorAll('.project-slider').forEach(sliderContainer => {
+      const slides = sliderContainer.querySelectorAll('.slide');
+      const nextBtn = sliderContainer.querySelector('.next-btn');
+      const prevBtn = sliderContainer.querySelector('.prev-btn');
+      let currentSlide = 0;
+
+      function updateSlides(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }
+
+      nextBtn.addEventListener('click', (e) => { e.preventDefault(); updateSlides(currentSlide + 1); });
+      prevBtn.addEventListener('click', (e) => { e.preventDefault(); updateSlides(currentSlide - 1); });
+
+      let autoPlay = setInterval(() => updateSlides(currentSlide + 1), 4000);
+      sliderContainer.addEventListener('mouseenter', () => clearInterval(autoPlay));
+      sliderContainer.addEventListener('mouseleave', () => autoPlay = setInterval(() => updateSlides(currentSlide + 1), 4000));
+    });
+
+    // --- ORIGINAL HERO PARTICLE BACKGROUND ---
+    const heroCanvas = document.getElementById('hero-bg');
+    const heroCtx = heroCanvas.getContext('2d');
+    heroCanvas.width = window.innerWidth;
+    heroCanvas.height = window.innerHeight;
+    const heroParticles = [];
+    for (let i = 0; i < 70; i++) {
+      heroParticles.push({ x: Math.random() * heroCanvas.width, y: Math.random() * heroCanvas.height, vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5, radius: Math.random() * 3 + 1 });
+    }
+    function animateHeroParticles() {
+      heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+      for (let i = 0; i < heroParticles.length; i++) {
+        for (let j = i; j < heroParticles.length; j++) {
+          let dx = heroParticles[i].x - heroParticles[j].x, dy = heroParticles[i].y - heroParticles[j].y, dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) { heroCtx.strokeStyle = 'rgba(59,130,246,0.2)'; heroCtx.lineWidth = 1; heroCtx.beginPath(); heroCtx.moveTo(heroParticles[i].x, heroParticles[i].y); heroCtx.lineTo(heroParticles[j].x, heroParticles[j].y); heroCtx.stroke(); }
+        }
+      }
+      heroParticles.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.x > heroCanvas.width) p.x = 0; if (p.x < 0) p.x = heroCanvas.width; if (p.y > heroCanvas.height) p.y = 0; if (p.y < 0) p.y = heroCanvas.height; heroCtx.fillStyle = '#3B82F6'; heroCtx.beginPath(); heroCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); heroCtx.fill(); });
+      requestAnimationFrame(animateHeroParticles);
+    }
+    animateHeroParticles();
+
+    // --- SECTION PARTICLES ---
+    document.querySelectorAll('.section-bg').forEach(canvas => {
+      const ctx = canvas.getContext('2d');
+      const resize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      };
+      resize();
+      const particles = [];
+      for (let i = 0; i < 30; i++) { particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3, radius: Math.random() * 2 }); }
+      function animateSectionParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x > canvas.width) p.x = 0; if (p.x < 0) p.x = canvas.width; if (p.y > canvas.height) p.y = 0; if (p.y < 0) p.y = canvas.height;
+          ctx.fillStyle = 'rgba(59,130,246,0.18)';
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
+        });
+        requestAnimationFrame(animateSectionParticles);
+      }
+      animateSectionParticles();
+      window.addEventListener('resize', resize);
+    });
+  </script>
 
 </body>
+
 </html>
